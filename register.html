@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Register</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration:none; color:inherit;">Smart Hire</a>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="login.html" class="btn-login">Login</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <form class="auth-form" id="registerForm">
+                <h2>Create an Account</h2>
+                <p style="text-align:center; color:var(--text-light); margin-bottom: 20px;">Join Smart Hire today!</p>
+
+                <!-- Full Name Field (Required) -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="full_name" placeholder="Enter your full name" required>
+                </div>
+
+                <!-- Email Field (Required) -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Phone Field (Optional) -->
+                <div class="form-group">
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+
+                <!-- Password Field (Required) -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                </div>
+
+                <!-- Role Selection Field -->
+                <div class="form-group">
+                    <label for="role">I want to register as a:</label>
+                    <select id="role" name="role" required>
+                        <option value="customer">Customer (To hire professionals)</option>
+                        <option value="provider">Service Provider (To offer services)</option>
+                    </select>
+                </div>
+
+                <!-- Provider Category Field (Hidden by Default) -->
+                <div class="form-group" id="providerCategoryGroup" style="display: none;">
+                    <label for="providerCategory">My Service Category:</label>
+                    <select id="providerCategory" name="provider_category">
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrician">Electrician</option>
+                        <option value="Home Repairs">Home Repairs</option>
+                        <option value="Graphic Design">Graphic Design</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Photography">Photography</option>
+                        <option value="Tutoring">Tutoring</option>
+                        <option value="Moving">Moving Service</option>
+                        <option value="Gardening">Gardening</option>
+                        <option value="Painting">Painting</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block">Register</button>
+
+                <div class="auth-redirect">
+                    Already have an account? <a href="login.html" style="color:var(--primary); font-weight:600;">Log in here</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!--
+        FIX: කලින් මෙතන inline <script> එකක් තියෙනවා, ඒකත් "registerForm" එකේ
+        submit event එකට listen කරලා, ඒත් fetch call එක comment කරලා තිබ්බ නිසා
+        console.log විතරයි කළේ. auth.js එකේ registerForm handler එකත් සමගාමීව
+        (duplicate) fire වෙන නිසා confusing/dead code එකක් වුනා.
+        auth.js එකේම real API POST call එක තියෙන නිසා මේ inline script එක
+        සම්පූර්ණයෙන්ම අයින් කළා.
+    -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

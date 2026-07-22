@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration:none; color:inherit;">Smart Hire</a>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <!-- auth.js මඟින් මෙම කොටස ස්වයංක්‍රීයව වෙනස් වනු ඇත -->
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <form class="auth-form" id="profileForm">
+                
+                <!-- Profile Avatar Icon -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="width: 100px; height: 100px; margin: 0 auto; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); overflow: hidden; background: #e2e8f0;">
+                        <img id="profileAvatar" src="" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                        <span id="avatarPlaceholder" style="font-size: 40px;">👤</span>
+                    </div>
+                    <h2 style="margin-top: 15px; margin-bottom: 5px;">My Profile</h2>
+                    <p style="color: var(--text-light); font-size: 0.9rem;">Manage your account details</p>
+                </div>
+
+                <!-- Full Name Field -->
+                <div class="form-group">
+                    <label for="profName">Full Name</label>
+                    <input type="text" id="profName" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="profEmail">Email Address</label>
+                    <input type="email" id="profEmail" required>
+                </div>
+
+                <!-- Phone Field -->
+                <div class="form-group">
+                    <label for="profPhone">Phone Number</label>
+                    <input type="tel" id="profPhone" placeholder="Not provided">
+                </div>
+
+                <!-- Role Field (Disabled - Users shouldn't change their core role here) -->
+                <div class="form-group">
+                    <label for="profRole">Account Type</label>
+                    <input type="text" id="profRole" disabled style="background: #f1f5f9; cursor: not-allowed; color: #64748b; font-weight: 600;">
+                </div>
+
+                <button type="submit" class="btn-primary btn-block" id="saveBtn">Save Changes</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // NOTE: BASE_URL දැන් local විදිහට declare කරන්නේ නෑ - js/config.js
+        // එකෙන් load වෙන global BASE_URL එකම පාවිච්චි කරනවා (එකම තැනකින් manage කරන්න).
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
+
+            // Token එක හෝ User ID එක නැතිනම් Login පිටුවට යොමු කිරීම
+            if (!token || !userId) {
+                alert('Please login to view your profile.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // 1. GET /users/{id} හරහා දැනට ඇති දත්ත ලබාගෙන Form එක පිරවීම
+            try {
+                const response = await fetch(`${BASE_URL}/users/${userId}`, {
+                    method: 'GET',
+                    headers: { 
+                        'Authorization': `Bearer ${token}` 
+                    }
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+                    document.getElementById('profName').value = user.full_name || '';
+                    document.getElementById('profEmail').value = user.email || '';
+                    document.getElementById('profPhone').value = user.phone || '';
+                    document.getElementById('profRole').value = (user.role || '').toUpperCase();
+                    
+                    // Generate Gravatar URL using email
+                    if (user.email && window.md5) {
+                        const emailHash = window.md5(user.email.trim().toLowerCase());
+                        const gravatarUrl = `https://www.gravatar.com/avatar/${emailHash}?d=identicon&s=150`;
+                        const avatarImg = document.getElementById('profileAvatar');
+                        const placeholder = document.getElementById('avatarPlaceholder');
+                        
+                        avatarImg.src = gravatarUrl;
+                        avatarImg.style.display = 'block';
+                        placeholder.style.display = 'none';
+                    }
+                    
+                } else {
+                    console.error('Failed to fetch user data');
+                }
+            } catch (err) {
+                console.error('Error fetching profile:', err);
+            }
+
+            // 2. PUT /users/{id} හරහා වෙනස් කළ දත්ත සේව් කිරීම (Update)
+            document.getElementById('profileForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const saveBtn = document.getElementById('saveBtn');
+                saveBtn.innerText = 'Saving...';
+                saveBtn.disabled = true;
+
+                const payload = {
+                    full_name: document.getElementById('profName').value,
+                    email: document.getElementById('profEmail').value,
+                    phone: document.getElementById('profPhone').value
+                };
+
+                try {
+                    const response = await fetch(`${BASE_URL}/users/${userId}`, {
+                        method: 'PUT',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        alert('Profile updated successfully!');
+                    } else {
+                        const data = await response.json();
+                        alert(`Update failed: ${data.detail || 'Error'}`);
+                    }
+                } catch (err) {
+                    console.error('Error updating profile:', err);
+                    alert('An error occurred while saving.');
+                } finally {
+                    saveBtn.innerText = 'Save Changes';
+                    saveBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

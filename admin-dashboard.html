@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .admin-modal.active {
+            display: flex;
+        }
+        .admin-modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        .btn-sm.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body style="background-color: var(--bg);">
+
+    <div class="admin-layout">
+
+
+        
+        <!-- Left Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Smart Hire</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" data-tab="dashboard" class="active">📊 Dashboard</a>
+                <a href="#" data-tab="users">👥 Users</a>
+                <a href="#" data-tab="providers">👷 Providers</a>
+                <a href="#" data-tab="services">🛠️ Services</a>
+                <a href="#" data-tab="bookings">📅 Bookings</a>
+                <a href="#" id="adminLogout" style="color: #ef4444; margin-top: 20px;">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="admin-content">
+
+            <header class="admin-header">
+                <h2 id="panelTitle">Overview</h2>
+                <div class="admin-profile">
+                    <span>Welcome, Admin</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- ================= DASHBOARD TAB ================= -->
+            <div class="admin-tab active" id="tab-dashboard">
+                <div class="admin-cards">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p id="totalUsers" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Service Providers</h3>
+                        <p id="totalProviders" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Bookings</h3>
+                        <p id="totalBookings" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <p id="totalRevenue" class="stat-value">Loading...</p>
+                    </div>
+                </div>
+
+                <section class="admin-recent-section">
+                    <h3>Recent Bookings</h3>
+                    <div id="recentBookingsBox" class="admin-panel-box" style="padding: 20px;">
+                        <p class="admin-empty-msg">Loading recent bookings...</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ================= USERS TAB (customers) ================= -->
+            <div class="admin-tab" id="tab-users">
+                <div class="admin-panel-box">
+                    <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                        <h3 style="margin: 0;">Manage Customers</h3>
+                        <button class="btn-primary btn-sm" onclick="openUserModal('customer')">+ Add Customer</button>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr><td colspan="5" class="admin-empty-msg">Loading users...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= PROVIDERS TAB ================= -->
+            <div class="admin-tab" id="tab-providers">
+                <div class="admin-panel-box">
+                    <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                        <h3 style="margin: 0;">Manage Providers</h3>
+                        <button class="btn-primary btn-sm" onclick="openUserModal('provider')">+ Add Provider</button>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="providersTableBody">
+                            <tr><td colspan="5" class="admin-empty-msg">Loading providers...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= SERVICES TAB ================= -->
+            <div class="admin-tab" id="tab-services">
+                <div class="admin-panel-box">
+                    <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                        <h3 style="margin: 0;">Manage Services</h3>
+                        <button class="btn-primary btn-sm" onclick="openServiceModal()">+ Add Service</button>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Provider ID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesTableBody">
+                            <tr><td colspan="5" class="admin-empty-msg">Loading services...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= BOOKINGS TAB ================= -->
+            <div class="admin-tab" id="tab-bookings">
+                <div class="admin-panel-box">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <tr><td colspan="5" class="admin-empty-msg">Loading bookings...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Admin Modals -->
+    <div id="userModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <h3 id="userModalTitle" style="margin-bottom: 15px;">Add User</h3>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Full Name</label>
+                <input type="text" id="modalUserName" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Email</label>
+                <input type="email" id="modalUserEmail" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Phone</label>
+                <input type="text" id="modalUserPhone" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" id="userPasswordGroup" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Password</label>
+                <input type="password" id="modalUserPassword" placeholder="Required for new users" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Role</label>
+                <select id="modalUserRole" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+                    <option value="customer">Customer</option>
+                    <option value="provider">Provider</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div style="display:flex; gap:10px; justify-content: flex-end; margin-top:20px;">
+                <button class="btn-outline" style="padding: 6px 12px;" onclick="closeUserModal()">Cancel</button>
+                <button class="btn-primary" style="padding: 6px 12px;" onclick="saveUser()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="serviceModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <h3 id="serviceModalTitle" style="margin-bottom: 15px;">Add Service</h3>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Title</label>
+                <input type="text" id="modalServiceTitle" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Category</label>
+                <select id="modalServiceCategory" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Graphic Design">Graphic Design</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Price ($)</label>
+                <input type="number" id="modalServicePrice" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display:block; margin-bottom:5px;">Description</label>
+                <textarea id="modalServiceDesc" rows="3" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></textarea>
+            </div>
+            <div style="display:flex; gap:10px; justify-content: flex-end; margin-top:20px;">
+                <button class="btn-outline" style="padding: 6px 12px;" onclick="closeServiceModal()">Cancel</button>
+                <button class="btn-primary" style="padding: 6px 12px;" onclick="saveService()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+        const authHeaders = { 'Authorization': `Bearer ${token}` };
+
+        // ================= ROUTE PROTECTION =================
+        document.addEventListener('DOMContentLoaded', () => {
+            const role = localStorage.getItem('role');
+            if (!token || role !== 'admin') {
+                alert('Access Denied! Admin privileges required.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            document.getElementById('adminLogout').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.clear();
+                window.location.href = 'index.html';
+            });
+
+            initTabs();
+            loadStats();
+            loadRecentBookings();
+        });
+
+        // ================= TAB SWITCHING =================
+        // NOTE: sidebar එකේ Categories/Payments/Reviews තාම data-tab නෑ (backend
+        // endpoints confirm වුනාට පස්සේ ඒවත් මේ pattern එකේම එකතු කරන්න පුළුවන්).
+        const TAB_TITLES = {
+            dashboard: 'Overview',
+            users: 'Manage Users',
+            providers: 'Manage Providers',
+            services: 'Manage Services',
+            bookings: 'Manage Bookings'
+        };
+        const loadedTabs = new Set(['dashboard']);
+
+        function initTabs() {
+            document.querySelectorAll('.sidebar-nav a[data-tab]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabName = link.dataset.tab;
+                    switchTab(tabName);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.sidebar-nav a[data-tab]').forEach(a => a.classList.remove('active'));
+            document.querySelector(`.sidebar-nav a[data-tab="${tabName}"]`).classList.add('active');
+
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+
+            document.getElementById('panelTitle').innerText = TAB_TITLES[tabName] || 'Overview';
+
+            // Lazy-load: පළවෙනි වතාවට tab එක open කරද්දී විතරයි fetch කරන්නේ
+            if (!loadedTabs.has(tabName)) {
+                loadedTabs.add(tabName);
+                if (tabName === 'users') loadUsers();
+                if (tabName === 'providers') loadProviders();
+                if (tabName === 'services') loadServices();
+                if (tabName === 'bookings') loadBookings();
+            }
+        }
+
+        // ================= DASHBOARD OVERVIEW =================
+        // NOTE: /admin/stats endpoint එක backend එකේ තියෙන්නම ඕන - නැත්නම් මේ
+        // function එක වෙනුවට /users, /services, /bookings response length ගණන් කරන්න පුළුවන්.
+        async function loadStats() {
+            try {
+                const response = await fetch(`${BASE_URL}/admin/stats`, { headers: authHeaders });
+                if (!response.ok) throw new Error('Failed to fetch stats');
+                const stats = await response.json();
+
+                document.getElementById('totalUsers').innerText = stats.total_users ?? '0';
+                document.getElementById('totalProviders').innerText = stats.total_providers ?? '0';
+                document.getElementById('totalBookings').innerText = stats.total_bookings ?? '0';
+                document.getElementById('totalRevenue').innerText = `$${stats.total_revenue ?? 0}`;
+            } catch (err) {
+                console.error('Error loading admin stats:', err);
+                ['totalUsers', 'totalProviders', 'totalBookings', 'totalRevenue'].forEach(id => {
+                    document.getElementById(id).innerText = 'N/A';
+                });
+            }
+        }
+
+        async function loadRecentBookings() {
+            const box = document.getElementById('recentBookingsBox');
+            try {
+                const response = await fetch(`${BASE_URL}/bookings?limit=5`, { headers: authHeaders });
+                if (!response.ok) throw new Error('Failed to fetch bookings');
+                const bookings = await response.json();
+
+                if (!bookings || bookings.length === 0) {
+                    box.innerHTML = '<p class="admin-empty-msg">No recent bookings found.</p>';
+                    return;
+                }
+
+                box.innerHTML = bookings.map(b => `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <strong>${b.service_title || 'Service'}</strong>
+                        <span style="color: var(--text-light);"> — ${b.date || ''} ${b.time || ''} — ${b.status || ''}</span>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.error('Error loading recent bookings:', err);
+                box.innerHTML = '<p class="admin-error-msg">Could not load recent bookings. Connect API to load data.</p>';
+            }
+        }
+
+        // ================= USERS & PROVIDERS =================
+        // NOTE: GET /users එකෙන් users ඔක්කොම එනවා කියලා assume කරලා, role අනුව
+        // client side filter කරලා Users (customer) / Providers tabs දෙකටම බෙදනවා.
+        // backend එකේ role query param එකක් තියෙනවා නම් (e.g. /users?role=provider)
+        // ඒක පාවිච්චි කරන එක වඩා efficient.
+        let usersCache = null;
+        let servicesCache = null;
+        let currentEditingUserId = null;
+        let currentEditingServiceId = null;
+
+        async function fetchAllUsers() {
+            if (usersCache) return usersCache;
+            const response = await fetch(`${BASE_URL}/users`, { headers: authHeaders });
+            if (!response.ok) throw new Error('Failed to fetch users');
+            usersCache = await response.json();
+            return usersCache;
+        }
+
+        function renderUserRow(user) {
+            const roleClass = user.role === 'provider' ? 'badge-provider' : (user.role === 'admin' ? 'badge-admin' : 'badge-customer');
+            return `
+                <tr data-user-id="${user.id}">
+                    <td>${user.full_name || '-'}</td>
+                    <td>${user.email || '-'}</td>
+                    <td>${user.phone || '-'}</td>
+                    <td><span class="badge ${roleClass}">${user.role || '-'}</span></td>
+                    <td>
+                        <button class="btn-sm btn-primary" onclick="openUserModal('${user.role}', '${user.id}')">Edit</button>
+                        <button class="btn-sm btn-danger" onclick="deleteUser('${user.id}')">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function openUserModal(defaultRole = 'customer', userId = null) {
+            currentEditingUserId = userId !== 'null' ? userId : null;
+            const modal = document.getElementById('userModal');
+            document.getElementById('userModalTitle').innerText = currentEditingUserId ? 'Edit User' : 'Add User';
+            
+            document.getElementById('modalUserName').value = '';
+            document.getElementById('modalUserEmail').value = '';
+            document.getElementById('modalUserPhone').value = '';
+            document.getElementById('modalUserPassword').value = '';
+            document.getElementById('modalUserRole').value = defaultRole;
+            document.getElementById('userPasswordGroup').style.display = currentEditingUserId ? 'none' : 'block';
+
+            if (currentEditingUserId && usersCache) {
+                const user = usersCache.find(u => u.id == currentEditingUserId);
+                if (user) {
+                    document.getElementById('modalUserName').value = user.full_name;
+                    document.getElementById('modalUserEmail').value = user.email;
+                    document.getElementById('modalUserPhone').value = user.phone;
+                    document.getElementById('modalUserRole').value = user.role;
+                }
+            }
+            modal.classList.add('active');
+        }
+
+        function closeUserModal() {
+            document.getElementById('userModal').classList.remove('active');
+        }
+
+        async function saveUser() {
+            const data = {
+                full_name: document.getElementById('modalUserName').value,
+                email: document.getElementById('modalUserEmail').value,
+                phone: document.getElementById('modalUserPhone').value,
+                role: document.getElementById('modalUserRole').value
+            };
+            
+            try {
+                let response;
+                if (currentEditingUserId) {
+                    response = await fetch(`${BASE_URL}/users/${currentEditingUserId}`, {
+                        method: 'PUT',
+                        headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    data.password = document.getElementById('modalUserPassword').value;
+                    response = await fetch(`${BASE_URL}/auth/register`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+                
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.detail || 'Failed to save user');
+                }
+                
+                alert('User saved successfully.');
+                closeUserModal();
+                usersCache = null; // bust cache
+                if (document.getElementById('tab-users').classList.contains('active')) loadUsers();
+                if (document.getElementById('tab-providers').classList.contains('active')) loadProviders();
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+
+        async function loadUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            try {
+                const users = await fetchAllUsers();
+                const customers = users.filter(u => u.role !== 'provider');
+                tbody.innerHTML = customers.length
+                    ? customers.map(renderUserRow).join('')
+                    : '<tr><td colspan="5" class="admin-empty-msg">No users found.</td></tr>';
+            } catch (err) {
+                console.error('Error loading users:', err);
+                tbody.innerHTML = '<tr><td colspan="5" class="admin-error-msg">Failed to load users.</td></tr>';
+            }
+        }
+
+        async function loadProviders() {
+            const tbody = document.getElementById('providersTableBody');
+            try {
+                const users = await fetchAllUsers();
+                const providers = users.filter(u => u.role === 'provider');
+                tbody.innerHTML = providers.length
+                    ? providers.map(renderUserRow).join('')
+                    : '<tr><td colspan="5" class="admin-empty-msg">No providers found.</td></tr>';
+            } catch (err) {
+                console.error('Error loading providers:', err);
+                tbody.innerHTML = '<tr><td colspan="5" class="admin-error-msg">Failed to load providers.</td></tr>';
+            }
+        }
+
+        async function deleteUser(userId) {
+            if (!confirm('මේ user ව delete කරන්නද? මේක undo කරන්න බෑ.')) return;
+            try {
+                const response = await fetch(`${BASE_URL}/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: authHeaders
+                });
+                if (response.ok) {
+                    // දෙකේම cache/list එකෙන් අයින් කරලා refresh කරනවා
+                    usersCache = null;
+                    document.querySelectorAll(`tr[data-user-id="${userId}"]`).forEach(row => row.remove());
+                    alert('User deleted successfully.');
+                } else {
+                    alert('Failed to delete user.');
+                }
+            } catch (err) {
+                console.error('Error deleting user:', err);
+                alert('An error occurred while deleting the user.');
+            }
+        }
+
+        // ================= SERVICES =================
+        async function loadServices() {
+            const tbody = document.getElementById('servicesTableBody');
+            try {
+                const response = await fetch(`${BASE_URL}/services`, { headers: authHeaders });
+                if (!response.ok) throw new Error('Failed to fetch services');
+                servicesCache = await response.json();
+
+                tbody.innerHTML = servicesCache.length
+                    ? servicesCache.map(s => `
+                        <tr data-service-id="${s.id}">
+                            <td>${s.title || '-'}</td>
+                            <td>${s.category || '-'}</td>
+                            <td>$${s.price ?? '-'}</td>
+                            <td>${s.provider_id ?? '-'}</td>
+                            <td>
+                                <button class="btn-sm btn-primary" onclick="openServiceModal('${s.id}')">Edit</button>
+                                <button class="btn-sm btn-danger" onclick="deleteService('${s.id}')">Delete</button>
+                            </td>
+                        </tr>
+                    `).join('')
+                    : '<tr><td colspan="5" class="admin-empty-msg">No services found.</td></tr>';
+            } catch (err) {
+                console.error('Error loading services:', err);
+                tbody.innerHTML = '<tr><td colspan="5" class="admin-error-msg">Failed to load services.</td></tr>';
+            }
+        }
+
+        async function deleteService(serviceId) {
+            if (!confirm('මේ service එක delete කරන්නද? මේක undo කරන්න බෑ.')) return;
+            try {
+                const response = await fetch(`${BASE_URL}/services/${serviceId}`, {
+                    method: 'DELETE',
+                    headers: authHeaders
+                });
+                if (response.ok) {
+                    document.querySelector(`tr[data-service-id="${serviceId}"]`)?.remove();
+                    alert('Service deleted successfully.');
+                } else {
+                    alert('Failed to delete service.');
+                }
+            } catch (err) {
+                console.error('Error deleting service:', err);
+                alert('An error occurred while deleting the service.');
+            }
+        }
+
+        function openServiceModal(serviceId = null) {
+            currentEditingServiceId = serviceId !== 'null' ? serviceId : null;
+            const modal = document.getElementById('serviceModal');
+            document.getElementById('serviceModalTitle').innerText = currentEditingServiceId ? 'Edit Service' : 'Add Service';
+            
+            document.getElementById('modalServiceTitle').value = '';
+            document.getElementById('modalServiceCategory').value = 'Cleaning';
+            document.getElementById('modalServicePrice').value = '';
+            document.getElementById('modalServiceDesc').value = '';
+
+            if (currentEditingServiceId && servicesCache) {
+                const svc = servicesCache.find(s => s.id == currentEditingServiceId);
+                if (svc) {
+                    document.getElementById('modalServiceTitle').value = svc.title;
+                    document.getElementById('modalServiceCategory').value = svc.category;
+                    document.getElementById('modalServicePrice').value = svc.price;
+                    document.getElementById('modalServiceDesc').value = svc.description;
+                }
+            }
+            modal.classList.add('active');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
+
+        async function saveService() {
+            const data = {
+                title: document.getElementById('modalServiceTitle').value,
+                category: document.getElementById('modalServiceCategory').value,
+                price: parseFloat(document.getElementById('modalServicePrice').value),
+                description: document.getElementById('modalServiceDesc').value
+            };
+            
+            try {
+                let response;
+                if (currentEditingServiceId) {
+                    response = await fetch(`${BASE_URL}/services/${currentEditingServiceId}`, {
+                        method: 'PUT',
+                        headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    response = await fetch(`${BASE_URL}/services`, {
+                        method: 'POST',
+                        headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+                
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.detail || 'Failed to save service');
+                }
+                
+                alert('Service saved successfully.');
+                closeServiceModal();
+                loadServices();
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+
+        // ================= BOOKINGS =================
+        const BOOKING_STATUSES = ['pending', 'confirmed', 'completed', 'cancelled'];
+
+        async function loadBookings() {
+            const tbody = document.getElementById('bookingsTableBody');
+            try {
+                const response = await fetch(`${BASE_URL}/bookings`, { headers: authHeaders });
+                if (!response.ok) throw new Error('Failed to fetch bookings');
+                const bookings = await response.json();
+
+                tbody.innerHTML = bookings.length
+                    ? bookings.map(b => `
+                        <tr data-booking-id="${b.id}">
+                            <td>${b.service_title || '-'}</td>
+                            <td>${b.date || '-'}</td>
+                            <td>${b.time || '-'}</td>
+                            <td>
+                                <select class="status-select" onchange="updateBookingStatus('${b.id}', this.value)">
+                                    ${BOOKING_STATUSES.map(s => `<option value="${s}" ${s === (b.status || '').toLowerCase() ? 'selected' : ''}>${s}</option>`).join('')}
+                                </select>
+                            </td>
+                            <td><button class="btn-sm btn-danger" onclick="deleteBooking('${b.id}')">Delete</button></td>
+                        </tr>
+                    `).join('')
+                    : '<tr><td colspan="5" class="admin-empty-msg">No bookings found.</td></tr>';
+            } catch (err) {
+                console.error('Error loading bookings:', err);
+                tbody.innerHTML = '<tr><td colspan="5" class="admin-error-msg">Failed to load bookings.</td></tr>';
+            }
+        }
+
+        async function updateBookingStatus(bookingId, newStatus) {
+            try {
+                const response = await fetch(`${BASE_URL}/bookings/${bookingId}`, {
+                    method: 'PUT',
+                    headers: { ...authHeaders, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                if (!response.ok) throw new Error('Failed to update status');
+            } catch (err) {
+                console.error('Error updating booking status:', err);
+                alert('Failed to update booking status.');
+            }
+        }
+
+        async function deleteBooking(bookingId) {
+            if (!confirm('මේ booking එක delete කරන්නද?')) return;
+            try {
+                const response = await fetch(`${BASE_URL}/bookings/${bookingId}`, {
+                    method: 'DELETE',
+                    headers: authHeaders
+                });
+                if (response.ok) {
+                    document.querySelector(`tr[data-booking-id="${bookingId}"]`)?.remove();
+                    alert('Booking deleted successfully.');
+                } else {
+                    alert('Failed to delete booking.');
+                }
+            } catch (err) {
+                console.error('Error deleting booking:', err);
+                alert('An error occurred while deleting the booking.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Service Details</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+        <!-- Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+
+
+
+
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Smart Hire</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="my-bookings.html">My Bookings</a>
+        </div>
+    </nav>
+
+    <main class="container detail-container">
+        <div id="service-detail-card" class="detail-card">
+            <p>Loading details...</p>
+        </div>
+
+        <div class="booking-section">
+            <h3>Book This Service</h3>
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="booking-date">Select Date</label>
+                    <input type="date" id="booking-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-time">Select Time</label>
+                    <input type="time" id="booking-time" required>
+                </div>
+                <button type="submit" class="btn-primary btn-block">Confirm Booking</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- FIX: file එකේ real name "bookings.js" (plural) - කලින් "booking.js" (singular)
+         file එකක් උඩ මේ path එකම දාලා තිබ්බ නිසා 404 වුනා, page එකම load වුනේ නෑ. -->
+    <script src="js/config.js"></script>
+    <script src="js/bookings.js"></script>
+</body>
+</html>

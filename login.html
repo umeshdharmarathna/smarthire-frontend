@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+
+
+        <!-- Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+    
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Smart Hire</a></div>
+    </nav>
+
+    <div class="form-container">
+        <!-- FIX: id එක "loginForm" කියලා (dash නැතුව) auth.js එකේ
+             document.getElementById('loginForm') එකට match වෙන්නම ඕන.
+             කලින් "login-form" කියලා තිබ්බ නිසා login button එක click කරද්දී
+             කිසිම දෙයක් වුනේම නෑ. -->
+        <form id="loginForm" class="auth-form">
+            <h2>Welcome Back</h2>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter password">
+            </div>
+            <button type="submit" class="btn-primary btn-block">Login</button>
+            <p class="auth-redirect">New to Smart Hire? <a href="register.html">Register here</a></p>
+        </form>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Browse Services</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration:none; color:inherit;">
+                Smart Hire
+            </a>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="login.html" class="btn-login">Login</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <h2>Find the Service You Need</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search services (e.g., Plumber, Cleaner)...">
+                <button id="search-btn" class="btn-primary">Search</button>
+            </div>
+        </section>
+
+        <!-- Dynamic Services -->
+        <section class="services-list" id="services-container">
+            <p class="loading">Loading services...</p>
+        </section>
+
+        <!-- Available Services Title Section -->
+        <section class="available-services">
+            <h2 class="available-title">AVAILABLE SERVICES</h2>
+            <p class="available-subtitle">
+                Explore our most popular professional services.
+            </p>
+        </section>
+
+
+        <!-- Service Provider Cards Grid -->
+        <div class="service-card-grid">
+
+            <!-- Card 1 -->
+            <div class="service-info-card">
+                <img src="images/Web_Development.jpg" alt="Web Development">
+                <div class="service-info-body">
+                    <h2>Web Development</h2>
+                    <p>Professional website development services.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="service-info-card">
+                <img src="images/photo-1581578731548-c64695cc6952.jpg" alt="Cleaning">
+                <div class="service-info-body">
+                    <h2>Cleaning</h2>
+                    <p>Trusted home and office cleaning services.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="service-info-card">
+                <img src="images/photo-elec.jpg" alt="Electrician">
+                <div class="service-info-body">
+                    <h2>Electrician</h2>
+                    <p>Safe electrical repair services.</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="service-info-card">
+                <img src="images/photo-plum1585704032915-c3400ca199e7.jpg" alt="Plumbing">
+                <div class="service-info-body">
+                    <h2>Plumbing</h2>
+                    <p>Professional plumbing solutions.</p>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="service-info-card">
+                <img src="images/photo-Grapi1503387762-592deb58ef4e.jpg" alt="Graphic Design">
+                <div class="service-info-body">
+                    <h2>Graphic Design</h2>
+                    <p>Creative design services.</p>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="service-info-card">
+                <img src="images/photo-Photography.jpg" alt="Photography">
+                <div class="service-info-body">
+                    <h2>Photography</h2>
+                    <p>Professional photography services.</p>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="service-info-card">
+                <img src="images/photo-teacher.jpg" alt="Teaching">
+                <div class="service-info-body">
+                    <h2>Teaching</h2>
+                    <p>Online and physical tutoring.</p>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="service-info-card">
+                <img src="images/photo-Gardening.jpg" alt="Gardening">
+                <div class="service-info-body">
+                    <h2>Gardening</h2>
+                    <p>Garden maintenance services.</p>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="service-info-card">
+                <img src="images/photo-Home Repairs.jpg" alt="Home Repairs">
+                <div class="service-info-body">
+                    <h2>Home Repairs</h2>
+                    <p>Reliable home repair services.</p>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="service-info-card">
+                <img src="images/photo-Moving Service.jpg" alt="Moving Service">
+                <div class="service-info-body">
+                    <h2>Moving Service</h2>
+                    <p>Easy and safe moving services.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+<section class="banner-section">
+
+    <!-- Background Image -->
+    <img src="images/work.jpg" alt="Banner Image" class="banner-image">
+
+    <!-- Dark Overlay -->
+    <div class="banner-overlay"></div>
+
+    <!-- Content -->
+    <div class="banner-content">
+
+        <h1>Your to-do list is on us.</h1>
+
+        <p>
+            Find trusted professionals for cleaning,
+            repairs, moving and home services.
+        </p>
+
+        <a href="#" class="banner-btn">
+            Book a Service
+        </a>
+
+    </div>
+
+</section>
+
+    <script src="js/config.js"></script>
+    <script src="js/services.js"></script>
+</body>
+</html>

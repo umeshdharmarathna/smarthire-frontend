@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Provider Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+        <!-- Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+
+
+
+
+
+
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Smart Hire</a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="my-bookings.html">Manage Bookings</a>
+            <a href="#" id="logout-btn" class="btn-outline">Logout</a>
+        </div>
+    </nav>
+
+    <main class="container dashboard-grid">
+        <section class="add-service-section">
+            <h3>Post a New Service</h3>
+            <form id="add-service-form">
+                <div class="form-group">
+                    <label for="service-title">Service Title</label>
+                    <input type="text" id="service-title" placeholder="e.g., Expert Plumbing Services" required>
+                </div>
+                <div class="form-group">
+                    <label for="service-category">Category</label>
+                    <input type="text" id="service-category" placeholder="e.g., Plumbing, Cleaning" required>
+                </div>
+                <div class="form-group">
+                    <label for="service-price">Price ($)</label>
+                    <input type="number" id="service-price" placeholder="e.g., 50" required>
+                </div>
+                <div class="form-group">
+                    <label for="service-desc">Description</label>
+                    <textarea id="service-desc" rows="4" placeholder="Describe your service here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary btn-block">Post Service</button>
+            </form>
+        </section>
+
+        <section class="my-services-section">
+            <h3>My Active Services</h3>
+            <div id="my-services-list">
+                <p>Loading your services...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/services.js"></script>
+    <script>
+        // FIX: කලින් මේ page එකට කවුරුත් (logged out කෙනෙක්වත්) direct URL එකෙන්
+        // enter වෙන්න පුළුවන් තිබ්බා. admin-dashboard.html එකේ තිබ්බ වගේම
+        // token + role check එකක් මෙතනටත් දැම්මා.
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const role = localStorage.getItem('role');
+
+            if (!token || role !== 'provider') {
+                alert('Access Denied! Please login as a service provider.');
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

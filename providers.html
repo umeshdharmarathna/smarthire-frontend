@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Browse Providers</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration:none; color:inherit;">
+                Smart Hire
+            </a>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="providers.html">Providers</a>
+            <a href="services.html">Services</a>
+            <a href="login.html" class="btn-login">Login</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <h2 id="page-title">Find Trusted Providers</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search providers by category...">
+                <button id="search-btn" class="btn-primary">Search</button>
+            </div>
+        </section>
+
+        <!-- Dynamic Providers -->
+        <section class="services-list" id="providers-container">
+            <p class="loading">Loading providers...</p>
+        </section>
+
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/providers.js"></script>
+    <script src="js/chat-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Environment variables (SECURITY)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel & Build outputs
+.vercel
+dist
+build
+
+# Dependencies & OS
+node_modules/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hire - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="body">
+
+    <!-- Background Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+    <div class="bg-shape shape4"></div>
+    <div class="bg-shape shape5"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Smart Hire</div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="login.html" class="btn-login">Login</a>
+            <a href="register.html" class="btn-primary">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Find Trusted Service Providers Instantly</h1>
+            <p>Book trusted help for home tasks.</p>
+            <div class="hero-buttons">
+                <a href="services.html" class="btn-primary">Take Services</a>
+                <a href="register.html" class="btn-outline">Join as Provider</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="section-title">
+            <h1>Explore Our <span>Services</span></h1>
+            <p>Choose from a wide range of trusted professionals ready to help you.</p>
+        </div>
+
+        <div class="category-grid">
+            <!-- Wrapped each card in a link to trigger search in services.html -->
+            <a href="providers.html?category=Cleaning" class="card-link">
+                <div class="card">
+                    <div class="icon">🧹</div>
+                    <h3>Cleaning</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Plumbing" class="card-link">
+                <div class="card">
+                    <div class="icon">🔧</div>
+                    <h3>Plumbing</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Electrician" class="card-link">
+                <div class="card">
+                    <div class="icon">⚡</div>
+                    <h3>Electrician</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Home+Repairs" class="card-link">
+                <div class="card">
+                    <div class="icon">🛠️</div>
+                    <h3>Home Repairs</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Graphic+Design" class="card-link">
+                <div class="card">
+                    <div class="icon">🎨</div>
+                    <h3>Graphic Design</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Web+Development" class="card-link">
+                <div class="card">
+                    <div class="icon">💻</div>
+                    <h3>Web Development</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Photography" class="card-link">
+                <div class="card">
+                    <div class="icon">📷</div>
+                    <h3>Photography</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Tutoring" class="card-link">
+                <div class="card">
+                    <div class="icon">📚</div>
+                    <h3>Tutoring</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Moving" class="card-link">
+                <div class="card">
+                    <div class="icon">🚚</div>
+                    <h3>Moving Service</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Gardening" class="card-link">
+                <div class="card">
+                    <div class="icon">🌿</div>
+                    <h3>Gardening</h3>
+                </div>
+            </a>
+            <a href="providers.html?category=Painting" class="card-link">
+                <div class="card">
+                    <div class="icon">🖌️</div>
+                    <h3>Painting</h3>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
+        <div class="guarantee-container">
+            <h2>Your satisfaction, <span>guaranteed</span></h2>
+            <div class="guarantee-grid">
+                <div class="guarantee-item">
+                    <div class="icon-box">✓</div>
+                    <h3>Secure & Protected</h3>
+                    <p>Your bookings and payments are safe.</p>
+                </div>
+                <div class="guarantee-item">
+                    <div class="icon-box">★</div>
+                    <h3>Verified Professionals</h3>
+                    <p>Every service provider is carefully verified.</p>
+                </div>
+                <div class="guarantee-item">
+                    <div class="icon-box">☎</div>
+                    <h3>Dedicated Support</h3>
+                    <p>Friendly support whenever you need help.</p>
+                </div>
+            </div>
+            <div class="blue-shape shape-one"></div>
+            <div class="blue-shape shape-two"></div>
+        </div>
+    </section>
+
+    <!-- Chat/Help Widget -->
+    <div id="chat-container"></div>
+
+    <!-- Scripts: config.js FIRST so BASE_URL is available to the rest -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <section class="how-section">
+
+    <div class="how-container">
+
+        <!-- Left Card -->
+        <div class="info-card">
+
+            <h2>How it works</h2>
+
+            <div class="step">
+                <div class="number one">1</div>
+                <p>Choose a service provider by price, skills, and reviews.</p>
+            </div>
+
+            <div class="step">
+                <div class="number two">2</div>
+                <p>Book your preferred provider at a convenient time.</p>
+            </div>
+
+            <div class="step">
+                <div class="number three">3</div>
+                <p>Chat, pay, and review your experience all in one place.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Right Image -->
+        <div class="image-box">
+            <!-- NOTE: filename එකේ spaces/commas තියෙනවා - ossim server/build tool
+                 එකකින් issue එකක් දෙන්න පුළුවන්. පුළුවන් නම් "how-it-works.png" වගේ
+                 space නැති නමකට image file එකම rename කරලා මෙතන path එකත් වෙනස් කරන්න. -->
+            <img src="images/ChatGPT Image Jul 18, 2026, 10_04_07 PM.png" alt="How It Works">
+        </div>
+
+    </div>
+
+    <!-- Font Awesome Link (ඔයාගේ <head> එකේ නැත්නම් මේක දාන්න) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<footer class="sh-footer">
+    <!-- Floating Help Button -->
+    <a href="https://wa.me/94766797421?text=Hello,%20I%20need%20some%20help%20with%20SmartHire" target="_blank" class="sh-help-btn" style="text-decoration: none;">
+        <i class="fa-regular fa-circle-question"></i> Help
+    </a>
+
+    <div class="sh-footer-container">
+        <!-- Social Media Section -->
+        <div class="sh-social-section">
+            <span class="social-text">Follow us! We're friendly:</span>
+            <div class="sh-social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <!-- Footer Main Links -->
+        <div class="sh-footer-links">
+            <!-- Column 1 -->
+            <div class="sh-footer-col">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="#">Become a Provider</a></li>
+                    <li><a href="#">Services By City</a></li>
+                    <li><a href="#">Services Nearby</a></li>
+                    <li><a href="#">All Services</a></li>
+                    <li><a href="#">Cost Guides By Category</a></li>
+                    <li><a href="#">Top Rated Providers</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="sh-footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Partner with SmartHire</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Terms & Privacy</a></li>
+                    <li><a href="#">Legal</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3 (App Download) -->
+            <div class="sh-footer-col app-download">
+                <h3>Download our app</h3>
+                <p>Tackle your to-do list wherever you are with our mobile app.</p>
+                <div class="app-buttons">
+                    <a href="#" class="store-btn">
+                        <i class="fa-brands fa-apple"></i>
+                        <div class="btn-text">
+                            <small>Download on the</small>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn">
+                        <i class="fa-brands fa-google-play"></i>
+                        <div class="btn-text">
+                            <small>GET IT ON</small>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</section>
+
+</body>
+</html>
